@@ -2167,3 +2167,13 @@ network *load_network(char *cfg, char *weights, int clear)
     }
     return net;
 }
+
+void free_network_custom(network *net)
+{
+    // Cleanup network's internal state
+    free_network(*net);
+
+    // Free the pointer itself; allocated via xcalloc() in
+    // load_network()/load_network_custom()
+    free(net);
+}
